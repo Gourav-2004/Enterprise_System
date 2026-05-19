@@ -2,19 +2,28 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
-const { PrismaBetterSqlite3 } = require('@prisma/adapter-better-sqlite3');
 
 const JWT_SECRET = 'super-secret-vault-key-123';
-// 1. Check if Railway provided a production database URL, otherwise fall back to your local file
-const databaseUrl = process.env.DATABASE_URL || 'file:./prisma/dev.db';
 
-// 2. Initialize the SQLite adapter using our dynamic path
-const adapter = new PrismaBetterSqlite3({
-  // We use .replace() because better-sqlite3 needs the raw path without the 'file:' prefix
-  url: databaseUrl.replace('file:', '') 
-});
+let prisma;
 
-const prisma = new PrismaClient({ adapter });
+// Railway / production → PostgreSQL
+if (process.env.DATABASE_URL?.startsWith('postgres')) {
+  prisma = new PrismaClient();
+}
+// Local → SQLite adapter
+else {
+  const { PrismaBetterSqlite3 } = require('@prisma/adapter-better-sqlite3');
+
+  const adapter = new PrismaBetterSqlite3({
+    url: './prisma/dev.db'
+  });
+
+  prisma = new PrismaClient({
+    adapter
+  });
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
