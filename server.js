@@ -2,27 +2,17 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
+const { PrismaPg } = require('@prisma/adapter-pg');
 
 const JWT_SECRET = 'super-secret-vault-key-123';
 
-let prisma;
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
 
-// Railway / production → PostgreSQL
-if (process.env.DATABASE_URL?.startsWith('postgres')) {
-  prisma = new PrismaClient();
-}
-// Local → SQLite adapter
-else {
-  const { PrismaBetterSqlite3 } = require('@prisma/adapter-better-sqlite3');
-
-  const adapter = new PrismaBetterSqlite3({
-    url: './prisma/dev.db'
-  });
-
-  prisma = new PrismaClient({
-    adapter
-  });
-}
+const prisma = new PrismaClient({
+  adapter,
+});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
