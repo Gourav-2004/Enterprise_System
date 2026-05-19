@@ -16,7 +16,6 @@ const adapter = new PrismaBetterSqlite3({
 
 const prisma = new PrismaClient({ adapter });
 const app = express();
-// Change this line near the top of your file
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
