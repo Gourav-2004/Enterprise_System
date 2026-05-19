@@ -1,0 +1,528 @@
+/* Add these styles to the bottom of your existing style.css file */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+select, input[type="date"] {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: #fff;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.btn-clear-all {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 8px 16px;
+  border-radius: 6px;
+  margin-top: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-clear-all:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* Badges for Categories */
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.badge-general { background: #4b5563; color: #fff; }
+.badge-work { background: #2563eb; color: #fff; }
+.badge-personal { background: #db2777; color: #fff; }
+.badge-urgent { background: #dc2626; color: #fff; }
+
+.task-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}:root {
+  --bg-primary: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-input: #334155;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --success: #10b981;
+  --border: #475569;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Header Area */
+header {
+  margin-bottom: 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  margin-bottom: 6px;
+  background: linear-gradient(to right, #a5b4fc, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.btn-clear-all {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 10px 18px;
+  border-radius: 8px;
+  margin-top: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-clear-all:hover {
+  background: var(--danger);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Form Container */
+.form-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+#task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#task-form input[type="text"], 
+#task-form textarea,
+#task-form select,
+#task-form input[type="date"] {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: #fff;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+#task-form input:focus, 
+#task-form textarea:focus,
+#task-form select:focus,
+#task-form input[type="date"]:focus {
+  border-color: var(--accent);
+}
+
+#task-form textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* Dropdown and Date Row alignment */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+#task-form button[type="submit"] {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 4px;
+}
+
+#task-form button[type="submit"]:hover {
+  background: var(--accent-hover);
+}
+
+/* Two Column Dashboard Layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.column {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 24px;
+  border-radius: 16px;
+  height: fit-content;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.column h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.column h2 span {
+  background: var(--bg-input);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 150px;
+}
+
+/* Task Cards */
+.task-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+}
+
+.task-card h3 {
+  font-size: 1.15rem;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.task-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Badges & Meta Row */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+.badge-general { background: #475569; color: #f8fafc; }
+.badge-work { background: #1e3a8a; color: #93c5fd; border: 1px solid #2563eb; }
+.badge-personal { background: #5b21b6; color: #ddd6fe; border: 1px solid #7c3aed; }
+.badge-urgent { background: #7f1d1d; color: #fca5a5; border: 1px solid #dc2626; }
+
+.task-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  padding: 6px 10px;
+  border-radius: 6px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Actions Suite */
+.task-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.btn-action {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-complete {
+  background: var(--success);
+  color: #fff;
+}
+.btn-complete:hover {
+  background: #059669;
+}
+
+.btn-delete {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.btn-delete:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+/* --- AUTH OVERLAY STYLING --- */
+.auth-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Helper class to hide the auth screen when logged in */
+.auth-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.auth-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.auth-card h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.auth-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+#auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#auth-form input {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: #fff;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+#auth-form button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#auth-form button:hover {
+  background: var(--accent-hover);
+}
+
+.auth-toggle {
+  margin-top: 20px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.auth-toggle a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.auth-toggle a:hover {
+  text-decoration: underline;
+}
+
+/* Header Session Row Layout */
+.header-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.btn-logout {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.btn-logout:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: white;
+}
+/* --- ANALYTICS DASHBOARD GRID --- */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.metric-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.metric-card h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.metric-card p {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.metric-card.critical {
+  border-color: rgba(239, 108, 108, 0.4);
+  background: linear-gradient(to bottom right, var(--bg-surface), #311c1c);
+}
+.metric-card.critical p {
+  color: var(--danger);
+}
+
+.text-success { color: var(--success) !important; }
+
+/* --- MANAGEMENT AREA --- */
+.management-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 14px;
+}
+.management-grid h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+}
+
+.role-pill {
+  background: var(--accent);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.hidden { display: none !important; }

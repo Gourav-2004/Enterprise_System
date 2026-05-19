@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Team Workspace</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="auth-overlay" class="auth-container">
+    <div class="auth-card">
+      <h2 id="auth-title">Enterprise System</h2>
+      <p id="auth-subtitle">Sign in to sync your secure task pipelines.</p>
+      
+      <form id="auth-form">
+        <input type="email" id="auth-email" placeholder="Email Address" required />
+        <input type="password" id="auth-password" placeholder="Password" required />
+        
+        <select id="auth-role" class="hidden">
+          <option value="USER">Standard User (Assignee Only)</option>
+          <option value="MANAGER">Project Manager (Create Projects/Tasks)</option>
+          <option value="ADMIN">System Administrator (Full Control)</option>
+        </select>
+
+        <button type="submit" id="auth-submit-btn">Sign In</button>
+      </form>
+      
+      <div class="auth-toggle">
+        <span id="toggle-text">New to the team?</span> 
+        <a href="#" id="toggle-auth-mode">Create an account</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <header>
+      <div class="header-meta">
+        <span id="user-display-email">🔒 Secured Session</span>
+        <span id="user-display-role" class="role-pill">USER</span>
+        <button id="logout-btn" class="btn-logout">Logout</button>
+      </div>
+      <h1>🎯 Enterprise Task Workspace</h1>
+      <p>RBAC Security Rules and Project Tracking Active</p>
+    </header>
+
+    <section class="metrics-grid">
+      <div class="metric-card">
+        <h3>Total Scope</h3>
+        <p id="stat-total">0</p>
+      </div>
+      <div class="metric-card">
+        <h3>To Do</h3>
+        <p id="stat-todo">0</p>
+      </div>
+      <div class="metric-card">
+        <h3>In Progress</h3>
+        <p id="stat-progress">0</p>
+      </div>
+      <div class="metric-card">
+        <h3>Completed</h3>
+        <p id="stat-done" class="text-success">0</p>
+      </div>
+      <div class="metric-card critical">
+        <h3>Overdue 🚨</h3>
+        <p id="stat-overdue">0</p>
+      </div>
+    </section>
+
+    <section id="management-hub" class="form-section hidden">
+      <h2>⚙️ Management Control Center</h2>
+      <div class="management-grid">
+        <form id="project-form">
+          <h3>Construct New Project</h3>
+          <input type="text" id="project-name" placeholder="Project Name" required />
+          <textarea id="project-desc" placeholder="Project Objectives..."></textarea>
+          <button type="submit">Deploy Project</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="form-section">
+      <h2>📝 Deploy New Objective</h2>
+      <form id="task-form">
+        <input type="text" id="task-title" placeholder="What is the objective?" required />
+        <textarea id="task-desc" placeholder="Provide context or description..."></textarea>
+        
+        <div class="form-row">
+          <select id="task-project" required>
+            <option value="" disabled selected>Select Parent Project</option>
+            </select>
+          <select id="task-category">
+            <option value="Feature">🚀 Feature</option>
+            <option value="Bug">🐛 Bug Fix</option>
+            <option value="Docs">📄 Documentation</option>
+            <option value="General">📁 General</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <input type="text" id="task-assignee" placeholder="Assignee User ID (Optional)" />
+          <input type="date" id="task-duedate" required />
+        </div>
+
+        <button type="submit">Publish Objective</button>
+      </form>
+    </section>
+
+    <main class="dashboard">
+      <div class="column">
+        <h2>📋 Target Backlog <span id="todo-count">0</span></h2>
+        <div id="todo-list" class="task-list"></div>
+      </div>
+      
+      <div class="column">
+        <h2>✅ Archive / Done <span id="done-count">0</span></h2>
+        <div id="done-list" class="task-list"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

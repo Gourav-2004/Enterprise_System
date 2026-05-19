@@ -1,0 +1,64 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. USER ENGINE (Handles profiles & authorization tiers)
+model User {
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  password      String
+  role          String          @default("USER") // ◄ THIS IS WHAT WAS MISSING!
+  createdAt     DateTime        @default(now())
+  
+  // Relations
+  tasksAssigned Task[]          @relation("TaskAssignee")
+  projects      ProjectMember[]
+}
+
+// 2. PROJECT ENGINE (Groups teams and tasks together)
+model Project {
+  id          Int             @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime        @default(now())
+  
+  // Relations
+  tasks       Task[]
+  members     ProjectMember[]
+}
+
+// 3. TEAM MANAGEMENT LINK (Many-to-Many junction table for Teams)
+model ProjectMember {
+  id        Int     @id @default(autoincrement())
+  projectId Int
+  userId    Int
+  roleInTeam String @default("MEMBER") // CONTRIBUTOR, LEAD
+
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId]) // Prevents adding the same user to a project twice
+}
+
+// 4. TASK ENGINE (Tracks status, priority, categories, deadlines, and assignees)
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  status      String   @default("TODO")     // TODO, IN_PROGRESS, DONE
+  category    String   @default("General")  // Bug, Feature, Documentation, etc.
+  dueDate     String?                       // Stored as YYYY-MM-DD for simple evaluation
+  createdAt   DateTime @default(now())
+
+  // Relationships
+  projectId   Int
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  assigneeId  Int?
+  assignee    User?    @relation("TaskAssignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+}
