@@ -7,11 +7,11 @@ const { PrismaPg } = require('@prisma/adapter-pg');
 const JWT_SECRET = 'super-secret-vault-key-123';
 
 const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL
 });
 
 const prisma = new PrismaClient({
-  adapter,
+  adapter
 });
 
 const app = express();
